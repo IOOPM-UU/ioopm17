@@ -1,0 +1,229 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[swedish]{babel}
+\usepackage{lmodern}
+\usepackage{parskip}
+\usepackage{paralist}
+
+\renewcommand{\bfdefault}{b}
+
+\synctex=1
+
+\title{\bf Ett rapportformat som ''aldrig'' är fel}
+\author{Tobias Skoglund\footnote{Med några minimala tillägg av Tobias Wrigstad.}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Inledning}
+
+Det finns många format för rapporter som hör till olika
+arbetsområden, yrken och språk. Genomgående för alla dessa är
+tydlighet. Vissa författare av rapporter tycker om att skriva
+stilistiskt medan andra vill hålla sig kort och koncist. I båda
+fallen är poängen i varje stycke glasklar om rapporten är
+välskriven och vidare är målet att stycket ska hänga ihop i ett
+sammanhang. Vi kommer i det här dokumentet att ge ett strukturerat
+förhållningssätt till rapportskrivande genom att beskriva
+rapportstrukturen IMRAD (Introduction, Method, Result, and
+Discussion).
+
+Oavsett vad du skriver för rapport och till vem så är alltid målet
+att göra rapporten tydlig och i andra hand att göra det lätt för
+läsaren att ta till sig den.
+
+
+\section{Vem är mottagaren?}
+
+Problemet att bestämma vem som är mottagaren av texten avgör
+vilken kunskap som förutsätts av mottagaren för att kunna ta till
+sig texten på ett lätt sätt. Det är inte ovanligt att författaren
+skriver ett stycke i början av rapporten som besrkiver till vem
+rapporten riktas. T.ex. det här stycket från manualen till
+programmet Wireshark:
+
+\begin{quote}
+  The intended audience of this book is anyone using Wireshark.
+  This book will explain all the basics and also some of the
+  advanced features that Wireshark provides. As Wireshark has
+  become a very complex program since the early days, not every
+  feature of Wireshark may be explained in this book.
+\end{quote}
+
+Citatet anger att manualen inte innehåller information som är
+svårt att ta till sig utan förkunskap. Troligen kommer ni att
+författa rapporter som är tekniska och detaljerade till sin natur.
+I dessa fall underlättar det att skriva ut till vem rapporten är
+riktad eftersom det köper er som författare fria från att bifoga
+sida efter sida med bakgrundsinformation.
+
+
+\section{Top-Down approach med IMRAD}
+
+Börja med att skriva rubrikerna Introduktion, Metod, Resultat och
+till sist Diskussion. Vi kommer nu att diskutera dessa rubriker i
+tur och ordning nedan.
+
+
+
+\subsection{Introduktion}
+
+I det första avsnittet i rapporten behövs en bra introduktion som
+beskriver problemet som lösts eller studerats och som mottagaren
+kan relatera till. Beskrivningen behöver gå från en generell
+beskrivning av problemdomänen till att beskriva väldigt specifikt
+vad problemet är och vilka konsekvenser ett svar får. Studera
+exemplet nedan från den kända forskningsartikeln ''Walking with
+coffee: why does it spill'' i American Physical Society 2012:
+
+\begin{quote}
+  In our busy lives, almost all of us have to walk with a cup of
+  coffee. While often we spill the drink, this familiar phenomenon
+  has never been explored systematically. Here we report on the
+  results of an experimental study of the conditions under which
+  coffee spills for various walking speeds and initial liquid
+  levels in the cup.
+\end{quote}
+
+Första stycket bör vara säljande. Det ska väcka intresse genom att
+både förklara problemet och presentera kort lösningen och om det
+finns resultat i ett stycke. Därefter kan man strukturera
+introduktionen på sitt egna sätt, men ofta finns en blandning av
+följande stycken med:
+
+\begin{itemize}[--]
+\item Behandla vilka som har studerat problemet tidigare och hur.
+  (Om du inte kan göra detta korrekt skadas din trovärdighet
+  enormt. )
+\item Behandla vilka tidigare lösningar som föreslagits (för- och
+  nackdelar). (I de flesta fall är läsaren redan insatt i liknande
+  eller tidigare arbete och att beskriva relationen mellan det som
+  rapporten handlar om och något liknande som läsaren redan kan
+  hjälper förståelsen oerhört och motiverar också arbetet.)
+ \item Beskriva punktvis vilka mål projektet utgick ifrån och
+   vilka som har lösts. (Detta anger klart och tydligt för läsaren
+   vilka ''glasögon hon skall ha på sig'' när hon läser texten.)
+\end{itemize}
+
+\subsection{Metod}
+
+Metodavsnittet heter sällan ''Metod'' utan snarare ''Bakgrund''
+eller ''Om \emph{någon\-ting}''. Det är i metodavsnittet som läsaren
+ska kunna få principen, verktygen eller teknologin bakom lösningen
+förklarad. Börja med att skriva den minsta andel text som gör
+lösningen förstålig. På samma sätt som författaren köpte sig fri
+genom att definera vem som är mottagaren så köper författaren sig
+fri från att ta upp information i senare avsnitt genom att baka in
+allting under metodavsnittet. I nästa stycke kommer vi att
+förklara hur man från denna minimala text tar fram exakt så mycket
+information som mottagaren behöver och inte mer.
+
+
+\subsection{Resultat}
+
+Ett bra stycke med resultat innehåller bara tillräckligt med text
+för att beskriva vilket försök som hör ihop med vilken figur eller
+tabell. Spara reflektioner över hur bra eller dåligt resultatet är
+till diskussionsdelen. Däremot bör författaren poängtera
+underligheter i resultaten och eventuellt ge en förklaring till
+varför de uppstår -- om det finns en. Som en regel för vilka
+resultat som ska tas med bör författaren blicka framåt till
+diskussionsdelen eftersom enbart resultat från det här avsnittet
+får diskuteras där.
+
+När ni upptäcker att det saknas information för att få en helhet i
+ett stycke skriv ner den informationen någonstans under
+avsnitten för Metod.
+
+
+\subsection{Diskussion}
+
+Det här avsnittet är i första hand kopplat till det föregående.
+Förbudet att reflektera över resultatet i föregående avsnitt lyfts
+nu och författaren har fritt fram att dra sina egna slutsatser. Om
+ni igen upptäcker att ni behöver förklara någonting så gå tillbaka
+till metodavsnittet och arbeta in den informationen där.
+
+Ibland kallas det här avsnittet även för sammanfattning. En
+diskussion kan tillföra och utvärdera och komma med en analys,
+medan en sammanfattning i regel inte får tillföra ny kunskap utan
+bara referera sådant som tidigare sagts.
+
+
+\section{En iterativ skrivprocess}
+
+Skrivande är en kreativ process, men det passar inte alla av olika
+anledningar. Därför tillhandahålls ett rent mekaniskt arbetssätt
+som åtminstone producerar en rapport på IMRAD-formen.
+
+\begin{enumerate}
+\item Skriv ner rubrikerna IMRAD och dela upp rubriker i
+  underrubriker och sätt bättre namn på dessa. Läs rubrikerna från
+  början till slut och fråga dig om mottagaren kommer att känna
+  sig bekväm i upplägget?
+
+\item Börja med introduktionen och skriv ner en mening eller två om
+  varje stycke. T.ex. ''Introduktion till problemet med separata
+  adressrymder mellan två datorer och om hur en gemensam
+  adressrymd ökar programmeringseffektiviteten.'', ''Om hur vi
+  implementerade en gemensam addressrymd över ett nätverk och
+  vilka experiment vi gjorde för att förstå och jämföra
+  prestandan'', ''Om hur vi förbättrar tidigare lösningar''.
+
+  Gör även detta för metodavsnittet men var uppmärksam på att
+  meningarna bör vara av typen ''Om hur nätverk fungerar och hur
+  man kan kommunicera data mellan två datorer.'', ''Om vilka
+  potentiella hinder som kan begränsa vår lösning''.
+
+\item Fyll styckena med text. Är ni flera författare är det
+  lämpligt att ge ett par stycken i följd till varje person.
+
+  Läs introduktionen, hittar ni något koncept eller begrepp där
+  som inte beskrevs i metodavsnittet? Se till att metodavsnittet
+  hänger ihop med introduktionen.
+
+\item Lägg in resultatfigurer och tabeller i resultatavsnittet.
+  Introduktionen och metodavsnittet är nära fulländelse om varje
+  figur och tabell kan kopplas till de problem ni har
+  identifierats och de lösningar ni har föreslagit i dessa
+  föregående stycken. Lägg till text emellen figurer och tabeller
+  för att presentera figurerna och sätta dem i sammanhang med sina
+  respektive problem eller lösningar. Påpeka eventuella
+  anormaliteter och om ni vet varför?
+
+\item Gå över till diksussionen och skriv ner vad
+  grundfrågeställningen var. Berätta om ni har svarat på era
+  problemställningar och poängtera vilka resultat som stärker er
+  lösning.
+
+  Läs introduktionen igen om se om ni hittar svar på frågorna där
+  i diskussionavsnittet.
+
+\item Använd ett rättstavningsverktyg för att rättsvara rapporten.
+\end{enumerate}
+
+
+\section{Avslutningsvis}
+
+Minns att på samma sätt som de flesta icke skön-litterära texter
+läses linjärt så skrivs inte en text heller linjärt. Det finns
+massa beroenden fram och tillbaka -- se till att hålla koll på
+dessa och anteckna t.ex. ''förutsätter att X redan har
+diskuterats'' etc. synligt i texten för att underlätta att texten
+inte blir obegriplig.
+
+Att skriva text är precis som att skriva kod. Enda sättet att öva
+på det är att göra det, och att läsa. Båda två behövs. 
+
+
+\end{document}
+
+%%% Local Variables: ***
+%%% mode: latex ***
+%%% TeX-master: "rapport.tex"  ***
+%%% ispell-local-dictionary: "british"  ***
+%%% End: ***
+
+
+
