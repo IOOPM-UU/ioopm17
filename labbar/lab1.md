@@ -604,8 +604,8 @@ Skriv nu ett program som tar emot två positiva tal och skriver ut deras
 största gemensamma delare med hjälp av Euklides algoritm:
 
     gcd(a, b) = a                om a = b
-    gdb(a, b) = gdc(a - b, b)    om a > b
-    gdb(a, b) = gdc(a, b - a)    om a < b
+    gcd(a, b) = gdc(a - b, b)    om a > b
+    gcd(a, b) = gdc(a, b - a)    om a < b
 
 Använd en **while-loop** eller en **for-loop** för att lösa
 problemet. Varje varv i loopen kommer variabeln `a` eller
@@ -720,7 +720,7 @@ else
   }
   else
   {
-    printf("Please provide a command line argument!")
+    printf("Please provide a command line argument!\n");
   }
 }
 ```
