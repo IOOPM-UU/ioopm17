@@ -430,6 +430,7 @@ funktionsprototyper från `utils.c`. I `utils.h` borde det nu alltså
 åtminstone stå:
 
 ```c
+#include <stdbool.h>
 int read_string(char *buf, int buf_siz);
 bool is_number(char *str);
 int ask_question_int(char *question);
