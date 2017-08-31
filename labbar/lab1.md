@@ -466,7 +466,7 @@ funktionen `atoi()`:
 
 ```c
 char *str = "42";
-int num = atoi(42);
+int num = atoi(str);
 printf("%s == %d?\n", str, num);
 ```
 
