@@ -585,7 +585,7 @@ int main(int argc, char *argv[])
      // Skriv ut innehållet
      for (int i = 0; i < db_siz; ++i)
      {
-       print_item(db[i]);
+       print_item(&db[i]);
      }
 
   }
