@@ -26,6 +26,13 @@ typedef int T;
 /// \returns: empty tree
 tree_t *tree_new();
 
+/// Remove a tree along with all T elements.
+/// Note, if T is a pointer, elements will not
+/// be removed. 
+///
+/// \returns: empty tree
+void tree_delete(tree_t *tree);
+
 /// Get the size of the tree 
 ///
 /// \returns: the number of nodes in the tree
