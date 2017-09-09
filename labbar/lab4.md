@@ -506,7 +506,7 @@ Exempel:
     char *array2[] = { "förnicklad",   "smakande", "ordinär" };
     char *array3[] = { "skruvdragare", "kola",     "uppgift" };
 
-    char *str = magick(array1, array2, array3, 2); // 2 = längden på arrayerna
+    char *str = magick(array1, array2, array3, 3); // 3 = längden på arrayerna
 
     puts(str); // Polka-ordinär skruvdragare
 
