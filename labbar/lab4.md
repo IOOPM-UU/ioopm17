@@ -244,7 +244,7 @@ struct point
 };
 ```
 
-Strukten `point` innehåller två **fält** (aka poster, inbland
+Strukten `point` innehåller två **fält** (aka poster, ibland
 medlemmar eller medlemsvariabler), `x` och `y` -- båda av
 heltalstyp. Ett värde av `point`-typ, "en point", grupperar alltså
 två värden som hör ihop, i detta fall x- och y-koordinaterna hos
