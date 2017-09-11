@@ -1,5 +1,5 @@
 /// !! OBS -- du skall inte ändra i denna fil, med ETT undantag:
-/// !! du skall ändra i typedef av T så att det passar ditt program.
+/// !! du skall ändra i typedef av L så att det passar ditt program.
 
 
 #ifndef __list_h__
@@ -12,7 +12,7 @@ typedef struct list list_t;
 
 /// Change this definition and replace int with the appropriate type
 /// in your program. 
-typedef int T;
+typedef int L;
 
 /// \file list.h
 ///
@@ -31,13 +31,13 @@ list_t *list_new();
 ///
 /// \param list pointer to the list
 /// \param elem the element to be appended
-void list_append(list_t *list, T elem);
+void list_append(list_t *list, L elem);
 
 /// Inserts a new element at the beginning of the list
 ///
 /// \param list pointer to the list
 /// \param elem the element to be prepended
-void list_prepend(list_t *list, T elem);
+void list_prepend(list_t *list, L elem);
 
 /// Inserts a new element at a given index. 
 ///
@@ -68,7 +68,7 @@ void list_prepend(list_t *list, T elem);
 /// \param index the index for elem to be inserted at
 /// \param elem  the element to be prepended
 /// \returns true if succeeded, else false
-bool list_insert(list_t *list, int index, T elem);
+bool list_insert(list_t *list, int index, L elem);
 
 /// Removes an element from a list.
 ///
@@ -82,19 +82,19 @@ bool list_insert(list_t *list, int index, T elem);
 /// \param index the index to be removed
 /// \param elem a pointer to where the element can be stored
 /// \returns true if succeeded, else 
-bool list_remove(list_t *list, int index, T *elem);
+bool list_remove(list_t *list, int index, L *elem);
 
 /// Returns the element at a given index
 /// \param list  pointer to the list
 /// \param index the index to be returns
 /// \returns a pointer to the element at index index
-T list_get(list_t *list, int index);
+L list_get(list_t *list, int index);
 
 /// A convenience for list_get(list, 0)
-T list_first(list_t *list);
+L list_first(list_t *list);
 
 /// A convenience for list_get(list, -1)
-T list_last(list_t *list);
+L list_last(list_t *list);
 
 /// Returns the length of the list. It is undefined
 /// whether the length is calculated in O(n) time or
