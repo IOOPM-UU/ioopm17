@@ -88,13 +88,13 @@ bool list_remove(list_t *list, int index, L *elem);
 /// \param list  pointer to the list
 /// \param index the index to be returns
 /// \returns a pointer to the element at index index
-L list_get(list_t *list, int index);
+L *list_get(list_t *list, int index);
 
 /// A convenience for list_get(list, 0)
-L list_first(list_t *list);
+L *list_first(list_t *list);
 
 /// A convenience for list_get(list, -1)
-L list_last(list_t *list);
+L *list_last(list_t *list);
 
 /// Returns the length of the list. It is undefined
 /// whether the length is calculated in O(n) time or
