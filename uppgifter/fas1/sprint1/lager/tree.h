@@ -63,15 +63,15 @@ bool tree_has_key(tree_t *tree, K key);
 /// 
 /// \param tree pointer to the tree
 /// \param key the key of elem to be removed
-/// \returns: true if key is a key in tree
-T tree_get(tree_t *tree, K key);
+/// \returns: the key value, if key not found NULL pointer
+T *tree_get(tree_t *tree, K key);
 
 /// This does not need implementation until Assignment 2
 ///
 /// \param tree pointer to the tree
 /// \param key the key of elem to be removed
 /// \returns: the removed element
-T tree_remove(tree_t *tree, K key);
+T *tree_remove(tree_t *tree, K key);
 
 /// Swap the element for a given key for another.
 ///
