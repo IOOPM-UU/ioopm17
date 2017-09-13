@@ -54,7 +54,7 @@ bool tree_insert(tree_t *tree, K key, T elem);
 /// Checks whether a key is used in a tree
 ///
 /// \param tree pointer to the tree
-/// \param key the key of elem to be removed
+/// \param key the key of elem to be searched
 /// \returns: true if key is a key in tree
 bool tree_has_key(tree_t *tree, K key);
 
