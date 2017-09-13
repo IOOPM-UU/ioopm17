@@ -29,8 +29,6 @@ tree_t *tree_new();
 /// Remove a tree along with all T elements.
 /// Note, if T is a pointer, elements will not
 /// be removed. 
-///
-/// \returns: empty tree
 void tree_delete(tree_t *tree);
 
 /// Get the size of the tree 
@@ -39,6 +37,8 @@ void tree_delete(tree_t *tree);
 int tree_size(tree_t *tree);
 
 /// Get the depth of the tree 
+///
+/// \param tree pointer to the tree
 ///
 /// \returns: the depth of the deepest subtree
 int tree_depth(tree_t *tree);
@@ -63,7 +63,7 @@ bool tree_has_key(tree_t *tree, K key);
 /// 
 /// \param tree pointer to the tree
 /// \param key the key of elem to be removed
-/// \returns: true if key is a key in tree
+/// \returns: the value associated with key
 T tree_get(tree_t *tree, K key);
 
 /// This does not need implementation until Assignment 2
