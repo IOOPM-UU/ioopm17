@@ -7,6 +7,10 @@
 
 #include <stdbool.h>
 
+/// This function is used in list_delete() to allow the lists which are
+/// the sole owners of their data to free the data on delete.
+typedef void(*list_action)(L elem);
+
 /// Define struct list in your .c file not here! (why?)
 typedef struct list list_t;
 
@@ -17,9 +21,13 @@ typedef int L;
 /// \file list.h
 ///
 /// \author Tobias Wrigstad
-/// \version 1.1
-/// \date 2017-09-03
+/// \version 1.2
+/// \date 2017-09-13
 /// \bug None known. 
+///
+/// Changelog 2017-09-18
+/// Review changes (docs only)
+/// Added new helper functions
 
 
 /// Creates a new list
@@ -40,8 +48,6 @@ void list_append(list_t *list, L elem);
 void list_prepend(list_t *list, L elem);
 
 /// Inserts a new element at a given index. 
-///
-/// Valid indexes are [0..size]. 
 ///
 /// Example:
 ///
@@ -66,7 +72,7 @@ void list_prepend(list_t *list, L elem);
 /// 
 /// \param list  pointer to the list
 /// \param index the index for elem to be inserted at
-/// \param elem  the element to be prepended
+/// \param elem  the element to be inserted
 /// \returns true if succeeded, else false
 bool list_insert(list_t *list, int index, L elem);
 
@@ -74,19 +80,19 @@ bool list_insert(list_t *list, int index, L elem);
 ///
 /// Example: (assume l == [e2, e3, e1, e4])
 ///
-/// int elem;
+/// L elem;
 /// list_remove(l, 1, &elem);  // l = [e2, e1, e4], elem == e3
 /// list_remove(l, -1, &elem); // l = [e2, e1], elem == e4
 ///
 /// \param list  pointer to the list
 /// \param index the index to be removed
 /// \param elem a pointer to where the element can be stored
-/// \returns true if succeeded, else 
+/// \returns true if succeeded, else false
 bool list_remove(list_t *list, int index, L *elem);
 
 /// Returns the element at a given index
 /// \param list  pointer to the list
-/// \param index the index to be returns
+/// \param index the index to be returned
 /// \returns a pointer to the element at index index
 L *list_get(list_t *list, int index);
 
@@ -103,5 +109,30 @@ L *list_last(list_t *list);
 /// \param list the list
 /// \returns the length of list
 int list_length(list_t *list);
+
+//////////// ================= Added in version 1.2 
+///
+/// NOTE: Implementing these functions is NOT mandatory
+///
+
+/// Deletes a list. 
+///
+/// \param list pointer to the list
+/// \param cleanup a function that takes an element as
+///        argument, to be used to free memory. If this param is 
+///        NULL, no cleanup of keys or elements will happen.
+void list_delete(list_t *list, list_action cleanup);
+
+/// This function is used in list_apply() to allow applying a function
+/// to all elements in a list
+typedef void(*list_action2)(L elem, void *data);
+
+/// Applies a function to all elements in a list in list order
+///
+/// \param list the list
+/// \param fun the function to apply to all elements
+/// \param data an extra argument passed to each call to fun (may be NULL)
+void list_apply(list_t *list, list_action2 fun, void *data);
+
 
 #endif
