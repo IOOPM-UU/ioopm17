@@ -1,0 +1,365 @@
+#+title: Föreläsning 8
+* Gå från inlupp 1 till inlupp 2
+** Hur lämnar jag in min inlupp?
+- Redovisa den som vanligt (enligt Z100)
+- Lägg upp den i GitHub (enligt Z100)
+** Rotera par
+*** Omaka par
+*** Alla är inte klara med inlupp 1
+** Krav på inlupp 1:
+Observera att programmet
+  - inte får krascha vid körning med valid indata
+  - inte skall behöva kompileras om när indata ändras
+** Krav på inlupp 2:
+Utöver att det implementerar specifikationen fullständigt, modulo "frivilliga utökningar" skall det
+  - vara fritt från minnesläckage (verifieras t.ex. med valgrind)
+  - inte krascha vid körning med valid indata
+  - skydda sig från felaktig indata på lämpligt sätt och i lämplig utsträckning
+  - inte behöva kompileras om när indata ändras
+  - inte ha en massa halvtomma arrayer utan använda länkade strukturer för minneseffektivitet
+Ytterligare icke-funktionella krav är att
+  - inga globala variabler
+  - inga magiska nummer (t.ex. 128 står överallt i koden)
+  - kodens indentering lyfter fram kontrollflödet
+  - ingen "machokodning" (t.ex. omotiverade oneliners)
+  - återkommande logik är utbruten och inkapslad i funktioner
+  - namn på filer, variabler, funktioner, etc. skall hjälpa läsaren att förstå deras innebörd 
+    och beteende (t.ex. vilka värden som är rimliga, eller vad man kan förvänta sig från ett 
+    funktionsanrop)
+* Programmera mot gränssnittet
+** Informationsgömning
+** Gränssnittsdokumentation
+** Kodgranskning
+** Byta kod
+* Pekare 
+** Skillnaden mellan pekare och arrayer
+*** Vad händer när detta program körs?
+#+BEGIN_SRC c
+char *str = "Hello, world?";
+str[12] = '!';
+#+END_SRC
+*** Vad händer när detta program körs?
+#+BEGIN_SRC c
+char str[] = "Hello, world?";
+str[12] = '!';
+#+END_SRC
+*** Vad händer när detta program körs?
+#+BEGIN_SRC c
+char *str = strdup("Hello, world?");
+str[12] = '!';
+#+END_SRC
+*** Vad händer när detta program körs? (*OBS kuggfråga!*)
+#+BEGIN_SRC c
+char str[] = strdup("Hello, world?");
+str[12] = '!';
+#+END_SRC
+** Pekare till pekare (*wohoo!*)
+#+BEGIN_SRC c
+int i = 42;
+int *i_ptr = &i;
+int **i_ptr_ptr = &i_ptr;
+*++*i_ptr_ptr;
+#+END_SRC
+* Generella datastrukturer i C
+** unioner
+** void-pekare
+** Behov av funktionspekare
+*** Jämförelsefunktioner
+- T.ex. insättning i ett träd med okänd nyckeltyp
+*** Kopiera
+- T.ex. göra en datastruktur som alltid äger sina element
+*** Frigöra minne
+- T.ex. vill ta bort en datastruktur som äger sina element
+* Exempel: en generell lista
+** Typen element
+#+BEGIN_SRC c
+/// Publik
+union element
+{
+  int i;
+  uint u;
+  void *p;
+  float f;
+};
+#+END_SRC
+** Typdeklarationer
+#+BEGIN_SRC c
+typedef union element elem_t; /// publik
+typedef struct list list_t;   /// publik
+typedef struct link link_t;   /// privat
+/// Körs för varje element som läggs in i listan (kan t.ex. kopiera elementet)
+typedef elem_t(element_transfer_func_t)(elem_t);
+/// Frigör ett element
+typedef void(*element_free_func_t)(elem_t);
+/// Avgör ordningen mellan två element
+typedef size_t(*element_comp_func_t)(elem_t, elem_t);
+#+END_SRC
+** Publika funktioner
+#+BEGIN_SRC c
+list_t *list_new(element_transfer_func_t copy, element_free_func_t free, element_comp_func_t cmp);
+void list_insert(list_t *list, int index, elem_t element);
+void list_prepend(list_t *list, elem_t element);
+void list_append(list_t *list, elem_t element);
+bool list_remove(list_t *list, int index, bool delete);
+elem_t *list_get(list_t *list, int index);
+void list_delete(list_t *list, bool delete);
+size_t list_size(list_t *list);
+#+END_SRC
+* Instantiering: en lista med hyllor
+Nedan följer ett exempel på hur man skulle kunna instantiera en lista av hyllor. 
+Funktionen shelf_copy() kopierar ett elem_t med en shelf_t i. 
+Funktionen shelf_free() tar bort ett elem_t med en shelf_t i.
+Funktionen shelf_compare() jämför två shelf_t jämlikt strcmp.
+#+BEGIN_SRC c
+struct shelf
+{
+  char letter; // A
+  int number;  // 25
+};
+
+elem_t shelf_copy(elem_t shelf)
+{
+  shelf_t *from = shelf.p;
+  shelf_t *to = malloc(sizeof(struct shelf));
+
+  *to = *from;
+
+  elem_t result;
+  result.p = to; 
+  return result; 
+}
+
+elem_t shelf_free(elem_t shelf)
+{
+  free(shelf.p);
+}
+
+size_t shelf_compare(elem_t a, elem_t b)
+{
+  shelf_t *s1 = a.p;
+  shelf_t *s2 = b.p;
+
+  if (s1->letter == s2->letter) 
+    {
+      return s1->number - s2->number;
+    }
+  else
+    {
+      return s1->letter - s2->letter;
+    }
+}
+
+list_t *list = list_new(shelf_copy, shelf_free, shelf_compare);
+#+END_SRC
+* Kodexempel 
+** generic_list.h
+#+BEGIN_SRC c
+#pragma once
+
+#include <stdbool.h>
+#include <stdint.h>
+
+typedef union element elem_t;
+typedef struct list list_t;
+typedef elem_t(element_transfer_func_t)(elem_t);
+typedef void(*element_free_func_t)(elem_t);
+typedef size_t(*element_comp_func_t)(elem_t, elem_t);
+
+union element
+{
+  int i;
+  uint u;
+  void *p;
+  float f;
+};
+
+list_t *list_new(element_transfer_func_t copy, element_free_func_t free, element_comp_func_t cmp);
+void list_insert(list_t *list, int index, elem_t element);
+void list_prepend(list_t *list, elem_t element);
+void list_append(list_t *list, elem_t element);
+bool list_remove(list_t *list, int index, bool delete);
+elem_t *list_get(list_t *list, int index);
+void list_delete(list_t *list, bool delete);
+size_t list_size(list_t *list);
+#+END_SRC
+** generic_list.c
+#+BEGIN_SRC c
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <assert.h>
+#include <string.h>
+#include "generic_list.h"
+
+typedef struct link link_t; 
+
+struct list
+{
+  link_t *first;
+  link_t *last;
+  size_t size;
+  element_transfer_func_t  copy;
+  element_free_func_t      free;
+  element_comp_func_t      compare;
+};
+
+struct link
+{
+  elem_t elem;
+  link_t *next;
+};
+
+static
+elem_t list_no_copy(elem_t element)
+{
+  return element;
+}
+
+size_t list_size(list_t *list)
+{
+  return list->size;
+}
+
+list_t *list_new(element_copy_fun copy, element_free_fun free, element_comp_fun compare)
+{
+  list_t *list = malloc(sizeof(*list));
+
+  if (list)
+    {
+      *list = (list_t) {
+        .copy = (copy) ? copy : list_no_copy,
+        .free = free,
+        .compare = compare
+      };
+    }
+
+  return list;
+}
+
+static
+link_t *link_new(elem_t element, link_t *next)
+{
+  link_t *link = malloc(sizeof(*link));
+
+  if (link)
+    {
+      *link = (link_t) { .elem = element, .next = next };
+    }
+
+  return link;
+
+}
+
+static
+int adjust_index(int index, int size)
+{
+  /// Negative indexes count from the back
+  if (index < 0)
+    {
+      /// Call adjust_index again to handle when
+      /// adjusted index is still negative
+      return adjust_index(size - index, size);
+    }
+
+  /// Index too big, adjust to after last element
+  if (index > size)
+    {
+      return size;
+    }
+
+  /// Index OK
+  return index;
+}
+
+static
+link_t **list_find(list_t *list, int index)
+{
+  link_t **cursor = &(list->first);
+
+  int adjusted_index =
+    (0 <= index && index < list->size) ? index : adjust_index(index, list->size);
+  
+  for (int i = 0; i < adjusted_index && *cursor; ++i)
+    {
+      cursor = &(*cursor)->next;
+    }
+
+  return cursor;
+}
+
+void list_insert(list_t *list, int index, elem_t element)
+{
+  int adjusted_index =
+    (0 <= index && index < list->size) ? index : adjust_index(index, list->size);
+
+  link_t **cursor = list_find(list, adjusted_index);
+
+  if (*cursor || adjusted_index == list->size)
+    {
+      *cursor = link_new(list->copy(element), *cursor);
+
+      ++list->size;
+    }
+}
+
+void list_prepend(list_t *list, elem_t element)
+{
+  list_insert(list, 0, element);
+}
+
+void list_append(list_t *list, elem_t element)
+{
+  list_insert(list, -1, element);
+}
+
+bool list_remove(list_t *list, int index, bool delete)
+{
+  int adjusted_index =
+    (0 <= index && index < list->size) ? index : adjust_index(index, list->size);
+  
+  link_t **cursor = list_find(list, adjusted_index);
+
+  if (*cursor)
+    {
+      link_t *to_remove = *cursor;
+      *cursor = (*cursor)->next;
+
+      if (delete)
+        {
+          list->free(to_remove->elem);
+        }
+      free(to_remove);
+
+      --list->size;
+      return true;
+    }
+  else
+    {
+      return false;
+    }
+}
+
+void list_delete(list_t *list, bool delete)
+{
+  while (list_size(list) > 0)
+    {
+      list_remove(list, 0, delete);
+    }
+
+  assert(list->size == 0);
+
+  free(list);
+}
+
+elem_t *list_get(list_t *list, int index)
+{
+  int adjusted_index =
+    (0 <= index && index < list->size) ? index : adjust_index(index, list->size);
+  
+  link_t **cursor = list_find(list, adjusted_index);
+
+  return (*cursor) ? &(*cursor)->elem : NULL;
+}
+#+END_SRC
