@@ -40,9 +40,11 @@ int tree_depth(tree_t *tree);
 ///
 /// Uses the tree's compare function to compare keys.
 ///
-/// If tree's copy function is non-NULL, it will be applied to elem and its result
-/// stored in the tree. Otherwise, elem will be stored in the tree. Note that keys are
-/// never copied and are assumed to be immutable. 
+/// If tree's copy function is non-NULL, it will be applied to
+/// elem and its result stored in the tree. Otherwise, elem will
+/// be stored in the tree. Note that keys are never copied and are
+/// assumed to be immutable. (They may however be freed by the
+/// tree.)
 ///
 /// \param tree pointer to the tree
 /// \param key the key of element to be appended -- this is assumed to be an immutable value
@@ -121,7 +123,8 @@ enum tree_order { inorder = 0, preorder = -1, postorder = 1 };
 /// \param order the order in which the elements will be visited
 /// \param fun the function to apply to all elements
 /// \param data an extra argument passed to each call to fun (may be NULL)
-void tree_apply(tree_t *tree, enum tree_order order, key_elem_apply_fun fun, void *data);
+/// \returns the result of all fun calls, combined with OR (||)
+bool tree_apply(tree_t *tree, enum tree_order order, key_elem_apply_fun fun, void *data);
 
 #endif
 

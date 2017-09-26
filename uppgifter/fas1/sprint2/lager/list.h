@@ -14,6 +14,22 @@ typedef struct list list_t;
 /// \returns: empty list
 list_t *list_new(element_copy_fun copy, element_free_fun free, element_comp_fun compare);
 
+
+/// Inserts a new element at a given index. 
+///
+/// If list's copy function is non-NULL, it will be applied to elem and its result
+/// stored in the list. Otherwise, elem will be stored in the list. 
+///
+/// All indexes are valid. 0 means first element. Negative indexes
+/// count backward and too large negative indexes equal 0. Too
+/// large positive indexes are same as -1.
+/// 
+/// \param list  pointer to the list
+/// \param index the index for elem to be inserted at
+/// \param elem  the element to be inserted
+/// \returns true if succeeded, else false
+void list_insert(list_t *list, int index, elem_t elem);
+
 /// Inserts a new element at the end of the list.
 ///
 /// If list's copy function is non-NULL, it will be applied to elem and its result
@@ -32,17 +48,17 @@ void list_append(list_t *list, elem_t elem);
 /// \param elem the element to be prepended
 void list_prepend(list_t *list, elem_t elem);
 
-/// Inserts a new element at a given index. 
+/// Removes an element from a list.
 ///
-/// If list's copy function is non-NULL, it will be applied to elem and its result
-/// stored in the list. Otherwise, elem will be stored in the list. 
-/// Example:
-
+/// All indexes are valid. 0 means first element. Negative indexes
+/// count backward and too large negative indexes equal 0. Too
+/// large positive indexes are same as -1.
+/// 
 /// \param list  pointer to the list
 /// \param index the index to be removed
 /// \param delete if true, run list's free function on all elements
 /// \returns true if succeeded, else false
-bool list_remove(list_t *list, int index, bool delete);
+void list_remove(list_t *list, int index, bool delete);
 
 /// Returns the element at a given index
 /// \param list  pointer to the list
