@@ -47,14 +47,15 @@ bool list_remove(list_t *list, int index, bool delete);
 /// Returns the element at a given index
 /// \param list  pointer to the list
 /// \param index the index to be returned
-/// \returns the element at index index
-elem_t list_get(list_t *list, int index);
+/// \param result pointer to where the element at index index will be stored if true is returned
+/// \returns true if index was a valid index
+bool list_get(list_t *list, int index, elem_t *result);
 
-/// A convenience for list_get(list, 0)
-elem_t list_first(list_t *list);
+/// A convenience for list_get(list, 0, result)
+bool list_first(list_t *list, elem_t *result);
 
-/// A convenience for list_get(list, -1)
-elem_t list_last(list_t *list);
+/// A convenience for list_get(list, -1, result)
+bool list_last(list_t *list, elem_t *result);
 
 /// Returns the length of the list. It is undefined
 /// whether the length is calculated in O(n) time or
