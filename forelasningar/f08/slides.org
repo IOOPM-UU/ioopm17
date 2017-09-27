@@ -77,7 +77,7 @@ int **i_ptr_ptr = &i_ptr;
 union element
 {
   int i;
-  uint u;
+  unsigned int u;
   void *p;
   float f;
 };
@@ -168,7 +168,7 @@ typedef size_t(*element_comp_func_t)(elem_t, elem_t);
 union element
 {
   int i;
-  uint u;
+  unsigned int u;
   void *p;
   float f;
 };
@@ -260,7 +260,7 @@ int adjust_index(int index, int size)
     {
       /// Call adjust_index again to handle when
       /// adjusted index is still negative
-      return adjust_index(size - index, size);
+      return adjust_index(size + index, size);
     }
 
   /// Index too big, adjust to after last element
