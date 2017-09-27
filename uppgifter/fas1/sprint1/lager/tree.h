@@ -75,7 +75,7 @@ bool tree_has_key(tree_t *tree, K key);
 /// e.g. NULL as a value to indicate failure)
 /// 
 /// \param tree pointer to the tree
-/// \param key the key of elem to be removed
+/// \param key the key of elem to be gotten
 /// \returns: the element associated wity key key
 T tree_get(tree_t *tree, K key);
 
