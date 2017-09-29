@@ -28,7 +28,7 @@ list_t *list_new(element_copy_fun copy, element_free_fun free, element_comp_fun 
 /// \param index the index for elem to be inserted at
 /// \param elem  the element to be inserted
 /// \returns true if succeeded, else false
-void list_insert(list_t *list, int index, elem_t elem);
+bool list_insert(list_t *list, int index, elem_t elem);
 
 /// Inserts a new element at the end of the list.
 ///
@@ -58,7 +58,7 @@ void list_prepend(list_t *list, elem_t elem);
 /// \param index the index to be removed
 /// \param delete if true, run list's free function on all elements
 /// \returns true if succeeded, else false
-void list_remove(list_t *list, int index, bool delete);
+bool list_remove(list_t *list, int index, bool delete);
 
 /// Returns the element at a given index
 /// \param list  pointer to the list
