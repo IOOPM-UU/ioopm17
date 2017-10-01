@@ -32,6 +32,7 @@ stack_node_t *stack_node_new(void *elem, stack_node_t *next)
   assert(result);
 
   *result = (stack_node_t) { .elem = elem, .next = next };
+  
   return result;
 }
 
