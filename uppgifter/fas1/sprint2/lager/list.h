@@ -55,7 +55,7 @@ void list_prepend(list_t *list, elem_t elem);
 /// 
 /// \param list  pointer to the list
 /// \param index the index to be removed
-/// \param delete if true, run list's free function on all elements
+/// \param delete if true, run list's free function on the removed element
 void list_remove(list_t *list, int index, bool delete);
 
 /// Returns the element at a given index
