@@ -1,4 +1,4 @@
-Letar du efter "kom-igång-uppgiften" i Java? Den hittar du [här](../uppgifter/fas2/sprint1/komigang/)!
+Letar du efter "kom-igång-uppgifterna" i Java? Dessa hittar du [här](http://wrigstad.com/ioopm/2017/lab6.html)!
 
 # Introduktionslabbar
 
