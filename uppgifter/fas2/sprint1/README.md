@@ -1,4 +1,7 @@
-Uppgifter för sprint 1
-======================
+Uppgifter för sprint 1 & 2
+===========================
 
-Uppgiften har flyttats hit 2017: http://wrigstad.com/ioopm/2017/twitterish.html
+* Sprint 1: http://wrigstad.com/ioopm/2017/twitterish.html
+* Sprint 2: http://wrigstad.com/ioopm/2017/symbolisk-kalkylator.html
+
+
