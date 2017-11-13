@@ -2,6 +2,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+/// Each client creates a new Client instance which holds a connection to the server.
 public class Twitterish {
     public static void main(String[] args) {
         if (args.length != 2) {
@@ -17,7 +18,7 @@ public class Twitterish {
     }
 
     // This is a nested class, we will go into this later in the course.
-    // For now, think of this as a class which is only usable by the Server.
+    // For now, think of this as a class which is only usable by the Client.
     private static class Client {
         private Account loggedInUser;
         private Set<Account> knownUsers = new TreeSet<Account>();
@@ -49,7 +50,7 @@ public class Twitterish {
         }
 
         // This is the code that sends a message to the server.
-        // You should not need to touch this code.
+        // You should not need to change this code.
         private void sendMessage(Object o) {
             try {
                 this.outgoing.writeObject(o);
@@ -60,7 +61,7 @@ public class Twitterish {
         }
 
         // This is the code that receives a message to the server.
-        // You should not need to touch this code.
+        // You should not need to change this code.
         private Object receiveMessage() {
             try {
                 Object o = this.incoming.readObject();
@@ -130,7 +131,7 @@ public class Twitterish {
 
             System.out.println("Unfriended " + friend.getName());
         }
-        
+
         private void ignoreFriend() {
             if (this.loggedInUser.hasFriends() == false) {
                 System.out.println("You don't have anyone to ignore. Try to make a few friends first.");

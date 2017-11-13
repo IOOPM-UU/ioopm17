@@ -2,6 +2,15 @@ import java.util.*;
 import java.io.*;
 import java.net.*;
 
+/// The server creates one Server instance that holds all the
+/// global state for the application on the server side. Then, for
+/// each client that connects, it creates a ClientProxy object
+/// which acts as a bridge between the server and the client on
+/// some remote machine. Essentially, the server acts as if all
+/// client proxies are the actual clients, and does not know/care
+/// that the proxies are just conduits which direct input to
+/// clients on the other side of a network or take their input
+/// from those clients.
 public class Server {
     private Set<Account> knownUsers = new TreeSet<Account>();
     private List<Post> posts = new LinkedList<Post>();
